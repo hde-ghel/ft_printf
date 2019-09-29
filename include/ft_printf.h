@@ -10,6 +10,12 @@ typedef struct s_printf
 	va_list			va_lst;
 	va_list			va_copy;
 	char			conversion;
+	int				return_value;
+
+
+	int				unused;
 }					t_printf;
+
+int		ft_printf(const char *format, ...);
 
 #endif
