@@ -11,6 +11,7 @@ typedef struct s_printf
 	va_list			va_copy;
 	char			conversion;
 	int				return_value;
+	va_list			va;
 
 
 	int				unused;

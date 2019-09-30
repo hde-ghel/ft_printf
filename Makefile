@@ -19,6 +19,7 @@ OBJDIR = ./obj/
 LIBDIR = ./libft/
 INCL = ./include/
 
+OBJLIB = $(shell find libft -type f | grep -E "\.o")
 FILES = $(shell find src -type f | grep -E "\.c$$" | sed 's/src//g')
 SRC = $(addprefix $(SRCDIR), $(FILES))
 OBJ = $(addprefix $(OBJDIR), $(FILES:.c=.o))
@@ -50,7 +51,7 @@ $(OBJSUBDIR):
 
 $(NAME): $(OBJSUBDIR) $(OBJ)
 	@echo "$(C_CYAN)libftprintf OBJ creation   [$(C_GREEN)✔$(C_CYAN)] $(C_RESET)"
-	@ar ru $(NAME) $(OBJ) $(LIBFT)
+	@ar ru $(NAME) $(OBJ) $(OBJLIB)
 	@echo "$(C_CYAN)libftprintf OBJ compilation[$(C_GREEN)✔$(C_CYAN)]$(C_RESET)"
 	@ranlib $(NAME)
 	@echo "$(C_CYAN)libftprintf.a creation     [$(C_GREEN)✔$(C_CYAN)]$(C_RESET)"
