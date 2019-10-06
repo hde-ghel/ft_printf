@@ -1,72 +1,37 @@
 #include "../include/ft_printf.h"
 
-
-/*
- *fill env struc (flags, option etc)
-int		parse_argument(t_printf *env, char **format)
+int		dispatch_args(t_printf *env)
 {
-			
-	return (0);
-}
-*/
-
-int		print_int(int nb)
-{
-	ft_putnbr(nb);
-	return (0);
-}
-
-int		handle_int(t_printf *env, char **format)
-{
-	int		nb;
-
-	(*format)++; //passer l'option
-	nb = va_arg(env->va, int);
-	print_int(nb);
-	return (0);
-}
-
-int		handle_string(t_printf *env, char **format)
-{
-	char	*str;
-
-	(*format)++;
-	str = va_arg(env->va, char *);
-	ft_putstr(str);
-	return (0);
-}
-//dispatch arguments
-int		dispatch_args(t_printf *env, char **format)
-{
-		(*format)++; //passer le %
-		//parse_flags(env, format); //check les flagss et autres (voir ordre de check)
-		if (**format == 'd' || **format == 'i')
-			handle_int(env, format);
-		else if (**format == 's')
-			handle_string(env, format);
+		env->format++; //passer le %
+		parse_options(env); //check les flagss et autres (voir ordre de check)
+		//suite de parse option
+		if (*env->format == 'd' || *env->format == 'i')
+			handle_int(env);
+		else if (*env->format == 's')
+			handle_string(env);
 	return (0);
 }
 
 // print jusqu au prochain %
-int		print_chars(char **format)
+int		print_chars(t_printf *env)
 {
 	char	*str_2;
 
-	str_2 = *format;
-	while(**format && **format != '%')
-		(*format)++;
-	write (1, str_2, *format - str_2);
-	return(*format - str_2);
+	str_2 = env->format;
+	while(*env->format && *env->format != '%')
+		env->format++;
+	write (1, str_2, env->format - str_2);
+	return(env->format - str_2);
 }
 
-int		browse_string(char *format, t_printf *env)
+int		browse_string(t_printf *env)
 {
-	while(*format)
+	while(*env->format)
 	{
-		if (*format != '%')
-			env->return_value += print_chars(&format);
+		if (*env->format != '%')
+			env->return_value += print_chars(env);
 		else
-			env->return_value += dispatch_args(env, &format);
+			env->return_value += dispatch_args(env);
 	}
 	return (0);
 }
@@ -75,12 +40,13 @@ int		ft_printf(const char *format, ...)
 {
 	t_printf	env;
 
-	va_start(env.va, format);
-	
-	if (format == NULL)
+	if (format == NULL) // faire les check ici si il y en a
 		ft_putstr("argument vide");
+	ft_bzero(&env, sizeof(env));
+	va_start(env.va, format);
+	env.format = (char *)format;
 
-	browse_string((char *)format, &env);
+	browse_string(&env);
 	va_end(env.va);
 	return(env.return_value);
 }
