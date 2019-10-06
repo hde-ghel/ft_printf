@@ -61,7 +61,6 @@ void		get_precision(t_printf *env, t_option *options)
 			env->format++;
 		}
 	}
-
 }
 
 void		get_length_modifiers(t_printf *env, t_option *options)
@@ -78,8 +77,9 @@ void		get_length_modifiers(t_printf *env, t_option *options)
 		else if (*env->format == 'L')
 			options->mod_L++;
 		env->format++;
-
 	}
+	while (*env->format == 'h' || *env->format == 'l' || *env->format == 'L')
+		env->format++;
 }
 
 void		parse_options(t_printf *env, t_option *options)
