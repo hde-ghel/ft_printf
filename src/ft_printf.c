@@ -6,12 +6,7 @@ int		dispatch_args(t_printf *env, t_option *options)
 		parse_options(env, options); //check les flagss et autres (voir ordre de check)
 		print_conversions(env, options);
 
-		//suite de parse option print_conversion()
-		if (*env->format == 'd' || *env->format == 'i')
-			handle_int(env);
-		else if (*env->format == 's')
-			handle_string(env);
-	return (0);
+	return (options->arg_length);
 }
 
 int		print_chars(t_printf *env)

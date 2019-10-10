@@ -6,7 +6,7 @@
 #    By: hde-ghel <hde-ghel@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 16:02:33 by hde-ghel          #+#    #+#              #
-#    Updated: 2019/05/28 14:32:43 by hde-ghel         ###   ########.fr        #
+#    Updated: 2019/10/08 14:21:03 by hde-ghel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ LIBFT = $(LIBDIR)libft.a
 SRCDIR = ./src/
 OBJDIR = ./obj/
 LIBDIR = ./libft/
+#LIBDIR = ./libft_linux
 INCL = ./include/
 
 OBJLIB = $(shell find libft -type f | grep -E "\.o")

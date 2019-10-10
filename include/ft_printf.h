@@ -19,6 +19,7 @@ typedef	struct	s_printf
 
 typedef	struct	s_option
 {
+	int			arg_length;
 	char		conversion;
 	int			flag_plus;
 	int			flag_moins;
@@ -47,11 +48,13 @@ void		parse_options(t_printf *env, t_option *options);
 int			print_conversions(t_printf *env, t_option *options);
 
 /*
-** handle_int.c
+** print_int.c
 */
 int			print_int(int nb);
 int			handle_int(t_printf *env);
-int			handle_string(t_printf *env);
-
-
+/*
+** print_c_s.c
+*/
+void		print_char(t_printf *env, t_option *options);
+void		print_string(t_printf *env, t_option *options);
 #endif
