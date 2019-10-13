@@ -7,19 +7,13 @@ void		no_conversion(t_printf *env)
 		ft_putstr("mon cul");
 }
 
-void		print_char(t_printf *env, t_option *options)
-{
-	if (env->unused == 100 && options->flag_zero)
-		ft_putstr("mon cul");
-}
-
 int		print_conversions(t_printf *env, t_option *options)
 {
 
 	options->conversion = *env->format;
 	if (options->conversion == 'c')
 		print_char(env, options);
-	if (options->conversion == 's')
+	else if (options->conversion == 's')
 		print_string(env, options);
 		//fonction print_conversion
 //	if (*env->format == 'c')

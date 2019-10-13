@@ -57,4 +57,10 @@ int			handle_int(t_printf *env);
 */
 void		print_char(t_printf *env, t_option *options);
 void		print_string(t_printf *env, t_option *options);
+
+/*
+** tools.c
+*/
+void		padding(t_option *option, int len, char c);
+
 #endif

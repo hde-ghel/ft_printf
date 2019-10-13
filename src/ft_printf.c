@@ -31,6 +31,7 @@ int		browse_string(t_printf *env)
 			env->return_value += print_chars(env);
 		else
 			env->return_value += dispatch_args(env, &options);
+		//protection a faire sur dispatch_arg changer le return
 	}
 	return (0);
 }
@@ -44,7 +45,6 @@ int		ft_printf(const char *format, ...)
 	ft_bzero(&env, sizeof(env));
 	va_start(env.va, format);
 	env.format = (char *)format;
-
 	browse_string(&env);
 	va_end(env.va);
 	return(env.return_value);
