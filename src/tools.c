@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../include/ft_printf.h>
+#include "../include/ft_printf.h"
 //peut etre plus rapide de malloc une str et de la printf a la place des while printf_char
 void		padding(t_option *options, int len, char c)
 {
@@ -23,7 +23,19 @@ void		padding(t_option *options, int len, char c)
 	}
 }
 
-void		putstr_len()
+void		putstr_len(char *str, t_option *options)
 {
+	int		len;
 
+	if (!str)
+		return ;
+	len = ft_strlen(str);
+	write(1, str, len);
+	options->arg_length += len;
+}
+
+void		putchar_len(char c, t_option *options)
+{
+	write(1, &c, 1);
+	options->arg_length += 1;
 }

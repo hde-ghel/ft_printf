@@ -13,7 +13,7 @@ typedef	struct	s_printf
 	va_list			va_copy;
 	int				return_value;
 
-
+//delete
 	int				unused;
 }					t_printf;
 
@@ -32,6 +32,8 @@ typedef	struct	s_option
 	int			mod_l;
 	int			mod_L;
 
+//delete
+	int			unused;
 }					t_option;
 
 int			ft_printf(const char *format, ...);
@@ -63,4 +65,8 @@ void		print_string(t_printf *env, t_option *options);
 */
 void		padding(t_option *option, int len, char c);
 
+/*
+**print_percent.c
+*/
+int			print_percent(t_printf *env, t_option *options);
 #endif

@@ -84,7 +84,6 @@ void		get_length_modifiers(t_printf *env, t_option *options)
 
 void		parse_options(t_printf *env, t_option *options)
 {
-	ft_bzero(&options, sizeof(options));
 	if (*env->format == '+' || *env->format == '-' || *env->format == ' ' ||
 		*env->format == '0' || *env->format == '#')
 		get_flags(env, options);

@@ -1,15 +1,18 @@
 #include "../include/ft_printf.h"
 
-int		dispatch_args(t_printf *env, t_option *options)
+int		dispatch_args(t_printf *env)
 {
-		env->format++; //passer le %
-		parse_options(env, options); //check les flagss et autres (voir ordre de check)
-		print_conversions(env, options);
+	t_option	options;
 
-	return (options->arg_length);
+	ft_bzero(&options, sizeof(options));
+	env->format++; //passer le %
+	parse_options(env, &options); //check les flagss et autres (voir ordre de check)
+	print_conversions(env, &options);
+
+	return (options.arg_length);
 }
 
-int		print_chars(t_printf *env)
+int		print_format(t_printf *env)
 {
 	char	*str_2;
 
@@ -22,15 +25,12 @@ int		print_chars(t_printf *env)
 
 int		browse_string(t_printf *env)
 {
-	t_option	options;
-
-	ft_bzero(&options, sizeof(options));
 	while(*env->format)
 	{
 		if (*env->format != '%')
-			env->return_value += print_chars(env);
+			env->return_value += print_format(env);
 		else
-			env->return_value += dispatch_args(env, &options);
+			env->return_value += dispatch_args(env);
 		//protection a faire sur dispatch_arg changer le return
 	}
 	return (0);
