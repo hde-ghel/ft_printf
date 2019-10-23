@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_options.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/23 19:22:59 by hde-ghel          #+#    #+#             */
+/*   Updated: 2019/10/23 19:23:00 by hde-ghel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ft_printf.h"
 
-void		get_flags(t_printf *env, t_option *options)
+static	void		get_flags(t_printf *env, t_option *options)
 {
 	while (*env->format == '+' || *env->format == '-' || *env->format == ' ' ||
 			*env->format == '0' || *env->format == '#')
@@ -8,7 +20,7 @@ void		get_flags(t_printf *env, t_option *options)
 		if (*env->format == '+')
 			options->flag_plus = 1;
 		else if (*env->format == '-')
-			options->flag_moins = 1;
+			options->flag_left = 1;
 		else if (*env->format == ' ')
 			options->flag_space = 1;
 		else if (*env->format == '0')
@@ -19,7 +31,7 @@ void		get_flags(t_printf *env, t_option *options)
 	}
 }
 
-void		get_width(t_printf *env, t_option *options)
+static	void		get_width(t_printf *env, t_option *options)
 {
 	if (*env->format == '*')
 	{
@@ -27,7 +39,7 @@ void		get_width(t_printf *env, t_option *options)
 		if (options->width < 0)
 		{
 			options->width *= -1;
-			options->flag_moins = 1;
+			options->flag_left = 1;
 		}
 		env->format++;
 	}
@@ -41,7 +53,7 @@ void		get_width(t_printf *env, t_option *options)
 	}
 }
 
-void		get_precision(t_printf *env, t_option *options)
+static	void		get_precision(t_printf *env, t_option *options)
 {
 	env->format++;
 	if (*env->format == '*')
@@ -63,7 +75,7 @@ void		get_precision(t_printf *env, t_option *options)
 	}
 }
 
-void		get_length_modifiers(t_printf *env, t_option *options)
+static	void		get_length_modifiers(t_printf *env, t_option *options)
 {
 	char	lenght;
 

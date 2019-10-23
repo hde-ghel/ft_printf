@@ -22,7 +22,7 @@ typedef	struct	s_option
 	int			arg_length;
 	char		conversion;
 	int			flag_plus;
-	int			flag_moins;
+	int			flag_left;
 	int			flag_space;
 	int			flag_zero;
 	int			flag_sharp;
@@ -42,18 +42,22 @@ int			ft_printf(const char *format, ...);
 /*
 ** parse_option.c
 */
+
 void		parse_options(t_printf *env, t_option *options);
 
 /*
 ** print_conversions
 */
+
 int			print_conversions(t_printf *env, t_option *options);
 
 /*
 ** print_int.c
 */
+
 int			print_int(int nb);
 int			handle_int(t_printf *env);
+
 /*
 ** print_c_s.c
 */
@@ -63,7 +67,8 @@ void		print_string(t_printf *env, t_option *options);
 /*
 ** tools.c
 */
-void		padding(t_option *option, int len, char c);
+int		padding(t_option *option, int len, char c);
+void	pustr_len(char *str, t_option *options, int len);
 
 /*
 **print_percent.c

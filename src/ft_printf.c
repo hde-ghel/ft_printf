@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/23 19:22:49 by hde-ghel          #+#    #+#             */
+/*   Updated: 2019/10/23 19:31:42 by hde-ghel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ft_printf.h"
 
-int		dispatch_args(t_printf *env)
+static	int		dispatch_args(t_printf *env)
 {
-	t_option	options;
+	t_option	options;// a declarer dans browse_string()
 
 	ft_bzero(&options, sizeof(options));
 	env->format++; //passer le %
@@ -12,7 +24,7 @@ int		dispatch_args(t_printf *env)
 	return (options.arg_length);
 }
 
-int		print_format(t_printf *env)
+static	int		print_format(t_printf *env)
 {
 	char	*str_2;
 
@@ -23,7 +35,7 @@ int		print_format(t_printf *env)
 	return(env->format - str_2);
 }
 
-int		browse_string(t_printf *env)
+static	int		browse_string(t_printf *env)
 {
 	while(*env->format)
 	{
@@ -45,6 +57,7 @@ int		ft_printf(const char *format, ...)
 	ft_bzero(&env, sizeof(env));
 	va_start(env.va, format);
 	env.format = (char *)format;
+	//(probable protection)
 	browse_string(&env);
 	va_end(env.va);
 	return(env.return_value);
