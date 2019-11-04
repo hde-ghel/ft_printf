@@ -67,8 +67,9 @@ void		print_string(t_printf *env, t_option *options);
 /*
 ** tools.c
 */
+char	*unitoa(uintmax_t nb, char *base_char, int base);
 int		padding(t_option *option, int len, char c);
-void	pustr_len(char *str, t_option *options, int len);
+void	putstr_len(char *str, t_option *options, int len);
 
 /*
 **print_percent.c

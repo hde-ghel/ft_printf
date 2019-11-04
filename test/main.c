@@ -1,7 +1,19 @@
+#include "../include/ft_printf.h"
 #include <stdio.h>
 
-int		main(void)
+int		main()
 {
-	printf("%", 45);
-	//printf("%10d", 45);
+	/* /// string \\\
+	ft_printf("%5.2s\n", "coucou");
+	printf("%5.2s", "coucou");
+	*/
+
+	/// pointeur adress %p \\\
+	
+	char	*str = "coucou";
+	void	*p = NULL;
+	ft_printf("real pf =%p\n %p\n", p, str);
+	printf("noob pf =%p\n %p", p, str);
+
+	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 10:41:45 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/10/23 19:23:50 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/11/04 19:22:13 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void		putstr_len(char *str, t_option *options, int len)
 	options->arg_length += len;
 }
 
-//peut etre plus rapide de malloc une str et de la printf a la place des while printf_char
 int			padding(t_option *options, int len, char c)
 {
 	char		*padding;
@@ -39,4 +38,26 @@ void		putchar_len(char c, t_option *options)
 {
 	write(1, &c, 1);
 	options->arg_length += 1;
+}
+
+int		count_digit(uintmax_t nb,  unsigned int base);
+
+char	*unitoa(uintmax_t nb, char *base_char, int base)
+{
+	char	*str;
+	int		nb_digit;
+
+	str = NULL;
+	nb_digit = count_digit(nb, base);
+	if (ft_strnew(nb_digit + 1))
+		return (NULL);
+	nb_digit--;
+	if (!nb)
+		str[nb_digit] = '0';
+	while (nb)
+	{
+		str[nb_digit--] = base_char[nb % base];
+		nb /= base;
+	}
+	return (str);
 }
