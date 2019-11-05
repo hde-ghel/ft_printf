@@ -30,6 +30,12 @@ int		print_conversions(t_printf *env, t_option *options)
 		print_char(env, options);
 	else if (options->conversion == 's')
 		print_string(env, options);
+	else if (options->conversion == 'p')
+		print_p(env, options);
+/*
+		if (print_p(env, options) == -1)
+			return (-1);
+*/
 	/*
 	else if (options->conversion == 'd')
 	else if (options->conversion == 'i')
@@ -37,7 +43,6 @@ int		print_conversions(t_printf *env, t_option *options)
 	else if (options->conversion == 'u')
 	else if (options->conversion == 'x')
 	else if (options->conversion == 'X')
-	else if (options->conversion == 'p')
 	else if (options->conversion == 'f')
 	else if (options->conversion == 'b')
 	else if (options->conversion == '%')

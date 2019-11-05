@@ -21,6 +21,7 @@ void		putstr_len(char *str, t_option *options, int len)
 	options->arg_length += len;
 }
 
+// a proteger partout !!! ou a changer
 int			padding(t_option *options, int len, char c)
 {
 	char		*padding;
@@ -40,7 +41,18 @@ void		putchar_len(char c, t_option *options)
 	options->arg_length += 1;
 }
 
-int		count_digit(uintmax_t nb,  unsigned int base);
+int		count_digit(uintmax_t nb,  unsigned int base)
+{
+	int		count;
+	
+	count = 1;
+	while(nb >= base)
+	{
+		nb /= base;
+		count++;
+	}
+	return (count);
+}
 
 char	*unitoa(uintmax_t nb, char *base_char, int base)
 {
@@ -49,7 +61,7 @@ char	*unitoa(uintmax_t nb, char *base_char, int base)
 
 	str = NULL;
 	nb_digit = count_digit(nb, base);
-	if (ft_strnew(nb_digit + 1))
+	if (!(str = ft_strnew(nb_digit)))
 		return (NULL);
 	nb_digit--;
 	if (!nb)

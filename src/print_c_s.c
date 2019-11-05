@@ -47,11 +47,34 @@ int		print_p(t_printf *env, t_option *options)
 {
 	char		*str;
 	int			len;
-	uintmax_t	n;
+	uintmax_t	nb;
+	int			precision;
 
-	n = va_arg(env->va, uintmax_t);
-	if (!(str = unitoa(n, "0123456789abcdef", 16)))
+	if (!(nb = va_arg(env->va, uintmax_t)))
+	{
+		putstr_len("(null)", options, 6);
+		env->format++;
+		return (0);
+	}
+	if (!(str = unitoa(nb, "0123456789abcdef", 16)))
 		return (-1);
 	len = ft_strlen(str) + 2;
+	precision = options->precision > len - 2 ? options->precision - len + 2 : 0;
+	if ((options->width > len && !options->flag_left && !options->flag_zero) ||
+	(options->precision != -1 && !options->flag_left && options->flag_zero))
+		padding(options, options->width - len - precision + 
+			(*str == '0' && !options->precision ? 1 : 0),' ');
+	putstr_len("0X", options, 2);
+	if (options->width && options->precision < 0 && !options->flag_left && options->flag_zero)
+		padding(options, options->width - len + precision , '0');
+	if (options->precision != -1)
+		padding(options, precision, '0');
+	if (nb || options->precision)
+		putstr_len(str, options, len - 2);
+	if (options->width > len && options->flag_left)
+		padding(options, options->width - len - precision + 
+			(!nb && !options->precision ? 1 : 0), ' ');
+	ft_strdel(&str);
+	env->format++;
 	return (0);
 }

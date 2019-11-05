@@ -3,6 +3,7 @@
 
 int		main()
 {
+	int		return_pf;
 	/* /// string \\\
 	ft_printf("%5.2s\n", "coucou");
 	printf("%5.2s", "coucou");
@@ -11,9 +12,11 @@ int		main()
 	/// pointeur adress %p \\\
 	
 	char	*str = "coucou";
-	void	*p = NULL;
-	ft_printf("real pf =%p\n %p\n", p, str);
-	printf("noob pf =%p\n %p", p, str);
+	void	*p = (void *)0X000000000010;
+	return_pf = printf("real pf =%p\n", str);
+	printf("%d\n", return_pf);
+	return_pf = ft_printf("noob pf =%p\n", str);
+	printf("%d\n", return_pf);
 
 	return(0);
 }

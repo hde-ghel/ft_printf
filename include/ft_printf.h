@@ -3,6 +3,8 @@
 
 #include <stdarg.h>
 #include "../libft/libft.h"
+//stdint for uintmax on linux
+#include <stdint.h>
 
 
 typedef	struct	s_printf
@@ -59,10 +61,11 @@ int			print_int(int nb);
 int			handle_int(t_printf *env);
 
 /*
-** print_c_s.c
+** print_c_s_p.c
 */
 void		print_char(t_printf *env, t_option *options);
 void		print_string(t_printf *env, t_option *options);
+int			print_p(t_printf *env, t_option *options);
 
 /*
 ** tools.c

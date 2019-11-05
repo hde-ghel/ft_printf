@@ -12,7 +12,7 @@
 
 NAME = libftprintf.a
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+#FLAGS = -Wall -Werror -Wextra
 LIBFT = $(LIBDIR)libft.a
 SRCDIR = ./src/
 OBJDIR = ./obj/
