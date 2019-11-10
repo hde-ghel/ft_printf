@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:22:49 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/10/23 19:31:42 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/11/09 16:41:20 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static	int		dispatch_args(t_printf *env)
 	t_option	options;// a declarer dans browse_string()
 
 	ft_bzero(&options, sizeof(options));
+	options.precision = -1;
 	env->format++; //passer le %
 	parse_options(env, &options); //check les flagss et autres (voir ordre de check)
 	print_conversions(env, &options);

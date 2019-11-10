@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/09 14:01:33 by hde-ghel          #+#    #+#             */
+/*   Updated: 2019/11/10 12:17:04 by hde-ghel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 #define FT_PRINTF_H
 
@@ -54,11 +66,9 @@ void		parse_options(t_printf *env, t_option *options);
 int			print_conversions(t_printf *env, t_option *options);
 
 /*
-** print_int.c
+** print_d_i.c
 */
-
-int			print_int(int nb);
-int			handle_int(t_printf *env);
+int		print_d_i(t_printf *env, t_option *options);
 
 /*
 ** print_c_s_p.c
@@ -70,9 +80,11 @@ int			print_p(t_printf *env, t_option *options);
 /*
 ** tools.c
 */
-char	*unitoa(uintmax_t nb, char *base_char, int base);
+char	*u_itoa(uintmax_t nb, char *base_char, int base);
 int		padding(t_option *option, int len, char c);
+void	putchar_len(char c, t_option *options);
 void	putstr_len(char *str, t_option *options, int len);
+int		count_digit(uintmax_t nb, unsigned int base);
 
 /*
 **print_percent.c

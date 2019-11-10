@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:23:15 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/10/23 19:23:17 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/11/09 14:19:51 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ int		print_conversions(t_printf *env, t_option *options)
 		print_string(env, options);
 	else if (options->conversion == 'p')
 		print_p(env, options);
+	else if (options->conversion == '%')
+		print_percent(env, options);
+	else if (options->conversion == 'd' || options->conversion == 'i')
+		print_d_i(env, options);
 /*
 		if (print_p(env, options) == -1)
 			return (-1);
 */
 	/*
-	else if (options->conversion == 'd')
-	else if (options->conversion == 'i')
 	else if (options->conversion == 'o')
 	else if (options->conversion == 'u')
 	else if (options->conversion == 'x')
