@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:22:49 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/09 16:41:20 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/11/11 17:08:30 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static	int		dispatch_args(t_printf *env)
 	ft_bzero(&options, sizeof(options));
 	options.precision = -1;
 	env->format++; //passer le %
-	parse_options(env, &options); //check les flagss et autres (voir ordre de check)
-	print_conversions(env, &options);
+	parse_options(env, &options);
+	print_conversions(env, &options);//a proteger jusqu au main
 
 	return (options.arg_length);
 }
@@ -44,7 +44,7 @@ static	int		browse_string(t_printf *env)
 			env->return_value += print_format(env);
 		else
 			env->return_value += dispatch_args(env);
-		//protection a faire sur dispatch_arg changer le return
+		//protection a faire sur dispatch_arg
 	}
 	return (0);
 }
@@ -58,7 +58,7 @@ int		ft_printf(const char *format, ...)
 	ft_bzero(&env, sizeof(env));
 	va_start(env.va, format);
 	env.format = (char *)format;
-	//(probable protection)
+	//(protection)
 	browse_string(&env);
 	va_end(env.va);
 	return(env.return_value);

@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 10:41:45 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/10 16:30:46 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/11/11 14:46:12 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,16 @@ void		putstr_len(char *str, t_option *options, int len)
 
 int			padding(t_option *options, int len, char c)
 {
+	int		i;
+
+	i = 0;
 	if (len <= 0)
 		return (0);
-	while (len--)
+	while (i < len)
+	{
 		write(1, &c, 1);
+		i++;
+	}
 	options->arg_length += len;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 14:01:33 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/10 12:17:04 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/11/11 14:38:59 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "../libft/libft.h"
 //stdint for uintmax on linux
 #include <stdint.h>
+#include <stdio.h>
 
 
 typedef	struct	s_printf
