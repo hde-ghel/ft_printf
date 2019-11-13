@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 10:41:47 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/10 13:34:54 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/11/13 13:46:20 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ int		print_p(t_printf *env, t_option *options)
 	if (nb || options->precision)
 		putstr_len(str, options, len - 2);
 	if (options->width > len && options->flag_left)
-		padding(options, options->width - len - precision + 
-			(!nb && !options->precision ? 1 : 0), ' ');
+		padding(options, options->width - len - precision + (!nb && !options->precision ? 1 : 0), ' ');
 	ft_strdel(&str);
 	env->format++;
 	return (0);

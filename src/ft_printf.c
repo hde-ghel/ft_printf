@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:22:49 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/11 17:08:30 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/11/13 16:53:13 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,18 @@ static	int		print_format(t_printf *env)
 
 static	int		browse_string(t_printf *env)
 {
+	int		arg_length;
+
 	while(*env->format)
 	{
 		if (*env->format != '%')
 			env->return_value += print_format(env);
 		else
-			env->return_value += dispatch_args(env);
+		{
+			if ((arg_length = dispatch_args(env)) == -1)
+				return (-1);
+			env->return_value += arg_length;
+		}
 		//protection a faire sur dispatch_arg
 	}
 	return (0);
@@ -53,13 +59,12 @@ int		ft_printf(const char *format, ...)
 {
 	t_printf	env;
 
-	if (format == NULL) // faire les check ici si il y en a
-		ft_putstr("argument vide");
 	ft_bzero(&env, sizeof(env));
 	va_start(env.va, format);
 	env.format = (char *)format;
 	//(protection)
-	browse_string(&env);
+	if (browse_string(&env) == -1) // malloc erreur, check si il faut free
+		return (-1);
 	va_end(env.va);
 	return(env.return_value);
 }

@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 14:01:33 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/11 14:38:59 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/11/13 13:57:07 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ int		print_d_i(t_printf *env, t_option *options);
 void		print_char(t_printf *env, t_option *options);
 void		print_string(t_printf *env, t_option *options);
 int			print_p(t_printf *env, t_option *options);
+
+/*
+** print_o_u_x_X.c
+*/
+int		print_ouxX(t_printf *env, t_option *options);
 
 /*
 ** tools.c
