@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:52:12 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/13 17:53:29 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/11/13 20:54:32 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,32 @@ static	void	print_hex(t_option *options, uintmax_t nb, char *str)
 	if (options->width > full_len && options->flag_left)
 		padding(options, options->width - full_len - (nb ? options->flag_sharp :0), ' ');
 }
-/*
+
 static	void	print_o_u(t_option *options, uintmax_t nb, char *str)
 {
+	int nb_len;
+	int full_len;
 
+	nb_len = ft_strlen(str);
+	full_len = (options->precision > nb_len ? options->precision : nb_len);
+	(!nb && !options->precision && !options->flag_sharp) ? full_len-- : 0;
+	if ((options->width > full_len && !options->flag_left && !options->flag_zero) || \
+		(options->precision != -1 && !options->flag_left && options->flag_zero))
+		padding(options, options->width - full_len - 
+		(nb && options->precision <= nb_len ? options->flag_sharp : 0), ' ');
+	if (options->flag_sharp && nb && options->conversion == 'o')
+		putchar_len('0', options);
+	if (options->precision > nb_len)
+		padding(options, options->precision - nb_len - (nb ? options->flag_sharp : 0), '0');
+	if (options->width && options->precision < 0 && !options->flag_left && options->flag_zero)
+		padding(options, options->width - nb_len - (nb ? options->flag_sharp : 0), '0');
+	if (nb || options->precision || options->flag_sharp)
+		putstr_len(str, options, 0);
+	if (options->width > full_len && options->flag_left)
+		padding(options, options->width - full_len - \
+		(nb && options->precision <= nb_len ? options->flag_sharp : 0), ' ');
 }
-*/
+
 static	char	*format_itoa(t_printf *env, uintmax_t nb)
 {
 	if (*env->format == 'x')
@@ -83,12 +103,10 @@ int		print_ouxX(t_printf *env, t_option *options)
 		print_hex(options, nb, str);
 	else if (*env->format == 'X')
 		print_hex(options, nb, str);
-	/*
 	else if (*env->format == 'o')
 		print_o_u(options, nb, str);
 	else if (*env->format == 'u')
 		print_o_u(options, nb, str);
-	*/
 	ft_strdel(&str);
 	env->format++;
 	return (0);
