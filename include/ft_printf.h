@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 14:01:33 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/13 13:57:07 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/12/14 18:44:08 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdarg.h>
 #include "../libft/libft.h"
 //stdint for uintmax on linux
+#include <math.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -46,6 +47,7 @@ typedef	struct	s_option
 	int			mod_h;
 	int			mod_l;
 	int			mod_L;
+	char		*f_str;
 
 //delete
 	int			unused;
@@ -53,6 +55,11 @@ typedef	struct	s_option
 
 int			ft_printf(const char *format, ...);
 
+/*
+** printf_float.c
+*/
+
+int		manage_float(t_printf *env, t_option *options);
 
 /*
 ** parse_option.c

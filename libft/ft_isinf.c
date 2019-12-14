@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_isinf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/11 15:01:11 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/10/11 19:10:13 by hde-ghel         ###   ########.fr       */
+/*   Created: 2019/12/14 14:47:53 by hde-ghel          #+#    #+#             */
+/*   Updated: 2019/12/14 14:50:26 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+int		ft_isinf(long double nb)
 {
-	size_t			i;
-	unsigned char	*s1;
-	unsigned char	*s2;
-
-	s1 = (unsigned char *)src;
-	s2 = (unsigned char *)dst;
-	i = 0;
-	while (i < n)
-	{
-		s2[i] = s1[i];
-		if (s1[i] == (unsigned char)c)
-			return (s2 + i + 1);
-		i++;
-	}
-	return (NULL);
+	if (nb == (1.0 / 0.0) || nb == (-1.0 / 0.0))
+		return (1);
+	return (0);
 }

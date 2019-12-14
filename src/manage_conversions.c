@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:23:15 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/13 15:13:52 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/12/14 17:54:28 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,12 @@ int		print_conversions(t_printf *env, t_option *options)
 	else if (options->conversion == 'o' || options->conversion == 'u'
 			|| options->conversion == 'x' || options->conversion == 'X')
 		print_ouxX(env, options);
-	/*
 	else if (options->conversion == 'f')
-	else if (options->conversion == '%')
-		print_percent(env, options);
+		manage_float(env, options);
+	/*
 	else
 		no_conversion(env);
-*/
+		*/
 	
 	return (0);
 }

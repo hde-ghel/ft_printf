@@ -4,14 +4,20 @@
 int		main()
 {
 	int		return_pf;
+	long double i;
+
+	i = 464654645.56464685465;
+	printf("%10Lf", i);
+	ft_printf("%10Lf\n", i);
 	/* /// string \\\
 	ft_printf("%5.2s\n", "coucou");
 	printf("%5.2s", "coucou");
 	*/
 
 	/// pointeur adress %p \\\
-	
-	char	*str = "coucou";
+
+/*
+ * char	*str = "coucou";
 
 	//void	*p = (void *)0x000000000000;
 	void	*p = NULL;
@@ -65,12 +71,10 @@ int		main()
     return_pf = ft_printf ("ft_printf6  :|% 05d|% 05.3d|% 05.1d|% 05.0d|% 05.d|\n", 0,0,0,0,0);
 	printf("FT return = %d\n", return_pf);
 	//
-	
 	return_pf = printf    ("printf6    %"),
 	printf("R  return = %d\n", return_pf);
     return_pf = ft_printf ("ft_printf6 %");
 	printf("FT return = %d\n", return_pf);
-	
-
 	return(0);
+	*/
 }

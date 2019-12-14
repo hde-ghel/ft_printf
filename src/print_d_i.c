@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 13:27:37 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/13 17:53:31 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/12/14 20:04:32 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static intmax_t	get_s_type(intmax_t n, t_option *options)
 	return (n);
 }
 
-char	*l_itoa(intmax_t n)
+char		*l_itoa(intmax_t n)
 {
 	int			len;
 	intmax_t	nb;
