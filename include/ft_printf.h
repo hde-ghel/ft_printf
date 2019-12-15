@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 14:01:33 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/12/14 18:44:08 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/12/15 15:40:01 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int			print_conversions(t_printf *env, t_option *options);
 ** print_d_i.c
 */
 int		print_d_i(t_printf *env, t_option *options);
+char	*l_itoa(intmax_t n);
 
 /*
 ** print_c_s_p.c

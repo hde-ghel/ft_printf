@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:58:44 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/12/14 20:04:30 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2019/12/15 19:08:29 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static int		print_nan_inf(t_printf *env, t_option *options, long double nb)
 	return (0);
 }
 
-int		precision_multiplier(t_option *options)
+long		precision_multiplier(t_option *options)
 {
 	int		i;
-	int		ret;
+	long	ret;
 
 	i = 0;
 	ret = 1;
@@ -46,25 +46,31 @@ int		precision_multiplier(t_option *options)
 	return (ret);
 }
 
-char		*ftoa(t_printf *env, t_option *options, long double nb)
+char		*ftoa(t_option *options, long double n)
 {
-	char		*f_str;
+	char			*d_str;
+	char			*f_str;
 	long double		float_part;
-	long double		deci_part;
+	long double		nb;
 
-	if (nb < 0)
-		nb *= -1;
-	
+	nb = (n < 0) ? -n :n;
 	float_part = nb - (unsigned long long)nb + 1;
 	float_part *= precision_multiplier(options);
 	if ((float_part - (unsigned long long)float_part) >= 0.5)
 		float_part++;
-
-
-	if (env->unused )
-		f_str = "coucou";
-
-	return (f_str);
+	if ((float_part / precision_multiplier(options)) > 2)
+		nb += 1;
+	// a proteger
+	d_str = l_itoa((uintmax_t)nb);
+	if (options->precision == 0)
+		return (d_str);
+	if (!(f_str = l_itoa((uintmax_t)float_part)))
+		return (NULL);
+	d_str = ft_strjoin_free(d_str, ".", 1);
+	d_str = ft_strjoin_free(d_str, f_str + 1, 1);
+	d_str = (n < 0) ? ft_strjoin_free("-", d_str, 2) : d_str;
+	ft_strdel(&f_str);
+	return (d_str);
 }
 
 int			manage_float(t_printf *env, t_option *options)
@@ -74,9 +80,9 @@ int			manage_float(t_printf *env, t_option *options)
 	nb = (options->mod_L == 0) ? va_arg(env->va, double) : va_arg(env->va, long double);
 	if (ft_isnan(nb) || ft_isinf(nb))
 		return(print_nan_inf(env, options, nb));
-	
-
-	options->f_str = ftoa(env, options, nb);
+	if(!(options->f_str = ftoa(options, nb)))
+		return (-1);
+	ft_putstr(options->f_str);
 
 	//displa_float(t_option *options, long double nb, char *options->f_str)
 	env->format++;

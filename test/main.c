@@ -6,9 +6,9 @@ int		main()
 	int		return_pf;
 	long double i;
 
-	i = 464654645.56464685465;
-	printf("%10Lf", i);
-	ft_printf("%10Lf\n", i);
+	i = -7555534344545.5421499;
+	printf("%.15Lf\n", i);
+	ft_printf("%.15Lf\n", i);
 	/* /// string \\\
 	ft_printf("%5.2s\n", "coucou");
 	printf("%5.2s", "coucou");
