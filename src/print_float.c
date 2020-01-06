@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:58:44 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/12/15 19:08:29 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/06 17:40:11 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ char		*ftoa(t_option *options, long double n)
 	ft_strdel(&f_str);
 	return (d_str);
 }
+
+
 
 int			manage_float(t_printf *env, t_option *options)
 {

@@ -6,11 +6,12 @@
 /*   By: tlechien <tlechien@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 21:50:29 by tlechien          #+#    #+#             */
-/*   Updated: 2019/11/13 20:59:00 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/06 15:39:39 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/printf.h"
+
 #define x(p1, p2)	ft_printf("pf result: %d\nft result: %d\n\n", p1, p2 -1)
 #define x(p1, p2)    ft_printf("Printf result:    %d\nFt_printf result: %d\n\n", p1, p2 -1)
 
