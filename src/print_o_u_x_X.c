@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:52:12 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/13 21:02:11 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/17 14:53:42 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static uintmax_t	get_unsinged_type(uintmax_t nb, t_option *options)
 {
 	if (options->mod_h == 2)
 		nb = (unsigned char)nb;
-	if (options->mod_h == 1)
+	else if (options->mod_h == 1)
 		nb = (unsigned short)nb;
-	if (options->mod_l == 1)
+	else if (options->mod_l == 1)
 		nb = (unsigned long)nb;
-	if (options->mod_l == 2)
+	else if (options->mod_l == 2)
 		nb = (unsigned long long)nb;
 	else
 		nb = (unsigned int)nb;
@@ -33,12 +33,13 @@ static	void	print_hex(t_option *options, uintmax_t nb, char *str)
 	int		full_len;
 
 	nb_len = ft_strlen(str);
+	//fprintf(stdout, "\033[31m precision = %d \n\33[0m", options->precision);
 	full_len = (options->precision > nb_len ? options->precision : nb_len);
 	if (!nb && !options->precision)
 		full_len--;
 	options->flag_sharp *= 2;
 	if ((options->width > full_len && !options->flag_left && !options->flag_zero) ||
-		(options->precision != -1 && options->flag_left && options->flag_zero))
+		(options->precision != -1 && !options->flag_left && options->flag_zero))
 		padding(options, options->width - full_len - (nb ? options->flag_sharp : 0), ' ');
 	if (options->flag_sharp && nb)
 		putstr_len((options->conversion == 'x') ? "0x" : "0X", options, 2);

@@ -4,11 +4,17 @@
 int		main()
 {
 	int		return_pf;
-	long double i;
+	double i;
 
-	i = -7555534344545.5421499;
-	printf("%.15Lf\n", i);
-	ft_printf("%.15Lf\n", i);
+	i = 0;
+
+	//printf("%.15Lf\n", i);
+	//ft_printf("%.15Lf\n", i);
+	printf ("printf9     :|%-0#5f|%-0#5.3f|%-0#5.1f|%-0#5.0f|%-0#5.f|\n", 0,0,0,0,0);
+ ft_printf ("ft_printf9  :|%-0#5f|%-0#5.3f|%-0#5.1f|%-0#5.0f|%-0#5.f|\n", 0,0,0,0,0);
+
+	printf("%-0#5.1f\n", i);
+	ft_printf("%-0#5.1f\n", i);
 	/* /// string \\\
 	ft_printf("%5.2s\n", "coucou");
 	printf("%5.2s", "coucou");
@@ -38,7 +44,7 @@ int		main()
 	printf("R  return = %d\n", return_pf);
 	return_pf = ft_printf("noob pf =%ld\n", LONG_MIN);
 	printf("FT return = %d\n", return_pf);
-	
+
     printf("\n{cyan}▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▃▅▇█▓▒░DECI░▒▓█▇▅▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂{eoc}\n\n");
 
 	return_pf = printf    ("printf1     :|%+ 5d|%+ 5.3d|%+ 5.1d|%+ 5.0d|%+ 5.d|\n", 0,0,0,0,0),

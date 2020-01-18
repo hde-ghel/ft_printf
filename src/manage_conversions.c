@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:23:15 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/12/14 17:54:28 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/16 13:34:39 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		no_conversion(t_printf *env)
 int		print_conversions(t_printf *env, t_option *options)
 {
 
-	//PROTECTION A LINK
+	//TOUES LES PROTECTION A LINK
 	options->conversion = *env->format;
 	if (options->conversion == 'c')
 		print_char(env, options);

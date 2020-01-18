@@ -6,13 +6,13 @@
 /*   By: tlechien <tlechien@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 21:50:29 by tlechien          #+#    #+#             */
-/*   Updated: 2020/01/06 15:39:39 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/16 11:55:38 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/printf.h"
 
-#define x(p1, p2)	ft_printf("pf result: %d\nft result: %d\n\n", p1, p2 -1)
+//#define x(p1, p2)	ft_printf("pf result: %d\nft result: %d\n\n", p1, p2 -1)
 #define x(p1, p2)    ft_printf("Printf result:    %d\nFt_printf result: %d\n\n", p1, p2 -1)
 
 int main()
@@ -131,8 +131,7 @@ int main()
     ft_printf   ("ft_printf7  :|% 03u|\n\n", 0));
 
 	//FLOAT\\
-	
-	/*
+
 
 	ft_printf("\n{red}▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▃▅▇█▓▒░FLOAT░▒▓█▇▅▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂{eoc}\n\n");
 	//1
@@ -162,7 +161,7 @@ int main()
 	//9
 	x(printf    ("printf9     :|%-0#5f|%-0#5.3f|%-0#5.1f|%-0#5.0f|%-0#5.f|\n", 0,0,0,0,0),
       ft_printf ("ft_printf9  :|%-0#5f|%-0#5.3f|%-0#5.1f|%-0#5.0f|%-0#5.f|\n\n", 0,0,0,0,0));
-*/
+
 	//OCTAL\\
 
 	ft_printf("\n{red}▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▃▅▇█▓▒░OCTAL░▒▓█▇▅▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂{eoc}\n\n");
@@ -277,7 +276,7 @@ int main()
 
 	//FLOAT\\
 
-/*
+
 	ft_printf("\n{red}▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▃▅▇█▓▒░FLOAT░▒▓█▇▅▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂{eoc}\n\n");
 	//1
 	x(printf    ("printf1     :|%5f|%5.3f|%5.1f|%5.0f|%5.f|\n", 1.1,1.1,1.1,1.1,1.1),
@@ -306,7 +305,7 @@ int main()
 	//9
 	x(printf    ("printf9     :|%-0#5f|%-0#5.3f|%-0#5.1f|%-0#5.0f|%-0#5.f|\n", 1.1,1.1,1.1,1.1,1.1),
       ft_printf ("ft_printf9  :|%-0#5f|%-0#5.3f|%-0#5.1f|%-0#5.0f|%-0#5.f|\n\n", 1.1,1.1,1.1,1.1,1.1));
-*/
+
 	//OCTAL\\
 
 	ft_printf("\n{red}▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▃▅▇█▓▒░OCTAL░▒▓█▇▅▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂{eoc}\n\n");
@@ -420,7 +419,8 @@ int main()
 	//7
 	x(printf    ("printf7     :|% 03u|\n", 0),
       ft_printf ("ft_printf7  :|% 03u|\n\n", 0));
-/*
+
+
 	//FLOAT\\
 
     ft_printf("\n{magenta}▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▃▅▇█▓▒░FLOAT░▒▓█▇▅▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂{eoc}\n\n");
@@ -485,5 +485,5 @@ int main()
 	x(printf    ("printf9.    :|%-0#5f|%-0#5.3f|%-0#5.1f|%-0#5.0f|%-0#5.f|\n", 999.,999.,999.,999.,999.),
     ft_printf   ("ft_printf9. :|%-0#5f|%-0#5.3f|%-0#5.1f|%-0#5.0f|%-0#5.f|\n\n", 999.,999.,999.,999.,999.));
 	return (0);
-*/
+
 }

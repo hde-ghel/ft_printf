@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 10:41:47 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/12/14 15:49:46 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/17 13:21:15 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,21 @@ void		print_string(t_printf *env, t_option *options)
 	int		len;
 	int		arg_len;
 
-	str = va_arg(env->va, char *);
-	arg_len = ft_strlen(str);
-	len = (options->precision >= 0) ? options->precision : arg_len;
-	if (len > arg_len)
-		len = arg_len;
-	if (options->width > len && !options->flag_left)
-		padding(options, options->width - len, options->flag_zero ? '0' : ' ');
-	if (len)
-		putstr_len(str, options, len);
-	if (options->width > len && options->flag_left)
-		padding(options, options->width - len, ' ');
+	if ((str = va_arg(env->va, char *)) != NULL)
+	{
+		arg_len = ft_strlen(str);
+		len = (options->precision >= 0) ? options->precision : arg_len;
+		if (len > arg_len)
+			len = arg_len;
+		if (options->width > len && !options->flag_left)
+			padding(options, options->width - len, options->flag_zero ? '0' : ' ');
+		if (len)
+			putstr_len(str, options, len);
+		if (options->width > len && options->flag_left)
+			padding(options, options->width - len, ' ');
+	}
+	else
+		putstr_len("(null)", options, 6);
 	env->format++;
 }
 

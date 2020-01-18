@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:22:49 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/12/14 13:08:15 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/18 11:09:21 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ static	int		dispatch_args(t_printf *env)
 
 	ft_bzero(&options, sizeof(options));
 	options.precision = -1;
-	env->format++; //passer le %
+	env->format++;
 	parse_options(env, &options);
 	print_conversions(env, &options);//a proteger jusqu au main
-
 	return (options.arg_length);
 }
 
@@ -63,7 +62,7 @@ int		ft_printf(const char *format, ...)
 	va_start(env.va, format);
 	env.format = (char *)format;
 	//(protection)
-	if (browse_string(&env) == -1) // malloc erreur, check si il faut free
+	if (browse_string(&env) == -1) // malloc erreur
 		return (-1);
 	va_end(env.va);
 	return(env.return_value);

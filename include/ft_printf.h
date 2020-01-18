@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 14:01:33 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/12/15 15:40:01 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/18 15:10:14 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef	struct	s_option
 	int			mod_l;
 	int			mod_L;
 	char		*f_str;
+	int			f_sign;
 
 //delete
 	int			unused;
