@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 14:01:33 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/18 15:10:14 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/19 14:31:21 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 #include <stdarg.h>
 #include "../libft/libft.h"
-//stdint for uintmax on linux
-#include <math.h>
-#include <stdint.h>
-#include <stdio.h>
+//#include <math.h>
+
+
+//#include <stdint.h>
+//#include <stdio.h>
 
 
 typedef	struct	s_printf
@@ -59,7 +60,7 @@ int			ft_printf(const char *format, ...);
 /*
 ** printf_float.c
 */
-
+char	*ull_itoa(unsigned long long n);
 int		manage_float(t_printf *env, t_option *options);
 
 /*

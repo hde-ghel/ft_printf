@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:22:49 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/18 11:09:21 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/19 16:30:18 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 static	int		dispatch_args(t_printf *env)
 {
-	t_option	options;// a declarer dans browse_string()
+	t_option	options;
 
 	ft_bzero(&options, sizeof(options));
 	options.precision = -1;
 	env->format++;
 	parse_options(env, &options);
-	print_conversions(env, &options);//a proteger jusqu au main
+	if (print_conversions(env, &options) == -1)
+		return (-1);
 	return (options.arg_length);
 }
 
@@ -49,7 +50,6 @@ static	int		browse_string(t_printf *env)
 				return (-1);
 			env->return_value += arg_length;
 		}
-		//protection a faire sur dispatch_arg
 	}
 	return (0);
 }
@@ -61,8 +61,7 @@ int		ft_printf(const char *format, ...)
 	ft_bzero(&env, sizeof(env));
 	va_start(env.va, format);
 	env.format = (char *)format;
-	//(protection)
-	if (browse_string(&env) == -1) // malloc erreur
+	if (browse_string(&env) == -1)
 		return (-1);
 	va_end(env.va);
 	return(env.return_value);

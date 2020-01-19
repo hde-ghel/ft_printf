@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "printf.h"
+#include "../include/printf.h"
 #include <limits.h>
 #include <float.h>
 #include <math.h>
@@ -1382,10 +1382,10 @@ y += printf("%.2f\n", 82.135);
 x += ft_printf("%.2f\n", 82.135);
 y += printf("%.3f\n", 484187171.1235);
 x += ft_printf("%.3f\n", 484187171.1235);
-
+/* -0 CAS INDETERMINE !!!
 y += printf("%f\n", -0.0);
 x += ft_printf("%f\n", -0.0);
-
+*/
 
 printf("\n");
 
@@ -1711,8 +1711,10 @@ printf("#31 %%%d\n", coucou, caca, kiki);
    printf( "printf1     : %+-5.3i-\n", 0);
 
 	 ft_printf("ft_printf11 : %hhhhhi-\n", 0);
-		 printf( "printf1     : %hhhhhi-\n", 0);
+	 printf( "printf1     : %hhhhhi-\n", 0);
 
+// CAS INDETERMINE TEST FUCKED UP !!!
+/*
 x += (ft_printf("Coucou float %-#15.1f\n", -0));
 y +=    (printf("Coucou float %-#15.1f\n", -0));
 printf("\n");
@@ -1720,7 +1722,7 @@ printf("\n");
 x += (ft_printf("Coucou float %f\n", -0.0));
 y +=    (printf("Coucou float %f\n", -0.0));
 printf("\n");
-
+*/
 x += (ft_printf("%-05d\n", -42));
 y += (printf("%-05d\n", -42));
 printf("\n");

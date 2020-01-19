@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:58:44 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/18 17:11:42 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/19 14:34:34 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,17 @@ char		*ftoa(t_option *options, long double n)
 	if ((float_part / precision_multiplier(options)) > 2)
 		nb += 1;
 	// a proteger
-	d_str = l_itoa((unsigned long long)nb);
+	d_str = ull_itoa((unsigned long long)nb);
 	//d_str = (n < 0) ? ft_strjoin_free("-", d_str, 2) : d_str;
 	if (options->precision == 0 && options->flag_sharp)
 		return (ft_strjoin_free(d_str, ".", 1));
 	if (options->precision == 0)
+	{
+		//write(1, "bug", 3);
+		options->width--;
 		return (d_str);
-	if (!(f_str = l_itoa((unsigned long long)float_part)))
+	}
+	if (!(f_str = ull_itoa((unsigned long long)float_part)))
 		return (NULL);
 	d_str = ft_strjoin_free(d_str, ".", 1);
 	d_str = ft_strjoin_free(d_str, f_str + 1, 1);
@@ -96,7 +100,6 @@ static void		displa_float(t_option *options)
 	if (options->width > len && !options->flag_left && options->flag_zero)
 		padding(options, options->width - len - sign, '0');
 	putstr_len(options->f_str, options, 0);
-	//(!options->precision && !options->flag_sharp) ? 0 : putchar_len('.', options);
 	if (options->width > len && options->flag_left)
 		padding(options, options->width - len - sign, ' ');
 }
