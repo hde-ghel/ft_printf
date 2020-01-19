@@ -6,7 +6,7 @@
 #    By: hde-ghel <hde-ghel@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 16:02:33 by hde-ghel          #+#    #+#              #
-#    Updated: 2019/11/09 17:47:46 by hde-ghel         ###   ########.fr        #
+#    Updated: 2020/01/19 19:00:32 by hde-ghel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ LIBFT = $(LIBDIR)libft.a
 SRCDIR = ./src/
 OBJDIR = ./obj/
 LIBDIR = ./libft/
-#LIBDIR = ./libft_linux
 INCL = ./include/
 
 OBJLIB = $(shell find libft -type f | grep -E "\.o")
@@ -72,6 +71,6 @@ fclean: clean
 re: fclean all
 
 norm:
-	@norminette $(./src/) $(INCL)
+	@norminette $(SRCDIR) $(INCL)
 
 .PHONY: norm clean fclean re all

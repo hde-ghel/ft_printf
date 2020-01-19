@@ -6,14 +6,13 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:58:44 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/19 14:34:34 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/19 20:11:08 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-
-static int		print_nan_inf(t_printf *env, t_option *options, long double nb)
+static	int		print_nan_inf(t_printf *env, t_option *options, long double nb)
 {
 	int		len;
 	char	*str;
@@ -29,7 +28,7 @@ static int		print_nan_inf(t_printf *env, t_option *options, long double nb)
 	return (0);
 }
 
-long		precision_multiplier(t_option *options)
+static	long	precision_multiplier(t_option *options)
 {
 	int		i;
 	long	ret;
@@ -46,41 +45,36 @@ long		precision_multiplier(t_option *options)
 	return (ret);
 }
 
-char		*ftoa(t_option *options, long double n)
+static	char	*ftoa(t_option *options, long double nb)
 {
 	char			*d_str;
 	char			*f_str;
 	long double		float_part;
-	long double		nb;
 
-	options->f_sign = (n < 0) ? 1 : 0;
-	nb = (n < 0) ? -n :n;
 	float_part = nb - (unsigned long long)nb + 1;
 	float_part *= precision_multiplier(options);
 	if ((float_part - (unsigned long long)float_part) >= 0.5)
 		float_part++;
-	if ((float_part / precision_multiplier(options)) > 2)
-		nb += 1;
-	// a proteger
-	d_str = ull_itoa((unsigned long long)nb);
-	//d_str = (n < 0) ? ft_strjoin_free("-", d_str, 2) : d_str;
+	((float_part / precision_multiplier(options)) > 2) ? nb += 1 : 0;
+	if (!(d_str = ull_itoa((unsigned long long)nb)))
+		return (NULL);
 	if (options->precision == 0 && options->flag_sharp)
 		return (ft_strjoin_free(d_str, ".", 1));
 	if (options->precision == 0)
 	{
-		//write(1, "bug", 3);
 		options->width--;
 		return (d_str);
 	}
 	if (!(f_str = ull_itoa((unsigned long long)float_part)))
 		return (NULL);
-	d_str = ft_strjoin_free(d_str, ".", 1);
+	if (!(d_str = ft_strjoin_free(d_str, ".", 1)))
+		return (NULL);
 	d_str = ft_strjoin_free(d_str, f_str + 1, 1);
 	ft_strdel(&f_str);
 	return (d_str);
 }
 
-static void		displa_float(t_option *options)
+static	void	displa_float(t_option *options)
 {
 	int		sign;
 	int		len;
@@ -104,14 +98,17 @@ static void		displa_float(t_option *options)
 		padding(options, options->width - len - sign, ' ');
 }
 
-int			manage_float(t_printf *env, t_option *options)
+int				manage_float(t_printf *env, t_option *options)
 {
 	long double	nb;
 
-	nb = (options->mod_L == 0) ? va_arg(env->va, double) : va_arg(env->va, long double);
+	nb = (options->mod_maj_l == 0) ? va_arg(env->va, double) : \
+		va_arg(env->va, long double);
 	if (ft_isnan(nb) || ft_isinf(nb))
-		return(print_nan_inf(env, options, nb));
-	if(!(options->f_str = ftoa(options, nb)))
+		return (print_nan_inf(env, options, nb));
+	options->f_sign = (nb < 0) ? 1 : 0;
+	nb = (nb < 0) ? -nb : nb;
+	if (!(options->f_str = ftoa(options, nb)))
 		return (-1);
 	displa_float(options);
 	env->format++;

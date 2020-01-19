@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 10:41:47 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/17 13:21:15 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/19 20:04:16 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void		print_string(t_printf *env, t_option *options)
 		if (len > arg_len)
 			len = arg_len;
 		if (options->width > len && !options->flag_left)
-			padding(options, options->width - len, options->flag_zero ? '0' : ' ');
+			padding(options, options->width - len, options->flag_zero ? '0' \
+					: ' ');
 		if (len)
 			putstr_len(str, options, len);
 		if (options->width > len && options->flag_left)
@@ -47,7 +48,7 @@ void		print_string(t_printf *env, t_option *options)
 	env->format++;
 }
 
-int		print_p(t_printf *env, t_option *options)
+int			print_p(t_printf *env, t_option *options)
 {
 	char		*str;
 	int			len;
@@ -61,15 +62,14 @@ int		print_p(t_printf *env, t_option *options)
 	precision = options->precision > len - 2 ? options->precision - len + 2 : 0;
 	if ((options->width > len && !options->flag_left && !options->flag_zero) ||
 		(options->precision != -1 && !options->flag_left && options->flag_zero))
-		padding(options, options->width - len - precision + 
-				(*str == '0' && !options->precision ? 1 : 0),' ');
+		padding(options, options->width - len - precision + \
+				(*str == '0' && !options->precision ? 1 : 0), ' ');
 	putstr_len("0x", options, 2);
-	if (options->width && options->precision < 0 && !options->flag_left && options->flag_zero)
-		padding(options, options->width - len + precision , '0');
-	if (options->precision != -1)
-		padding(options, precision, '0');
-	if (nb || options->precision)
-		putstr_len(str, options, len - 2);
+	if (options->width && options->precision < 0 && !options->flag_left && \
+			options->flag_zero)
+		padding(options, options->width - len + precision, '0');
+	(options->precision != -1) ? padding(options, precision, '0') : 0;
+	(nb || options->precision) ? putstr_len(str, options, len - 2) : 0;
 	if (options->width > len && options->flag_left)
 		padding(options, options->width - len - precision + (!nb && !options->precision ? 1 : 0), ' ');
 	ft_strdel(&str);

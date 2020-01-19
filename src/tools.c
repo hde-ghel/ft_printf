@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 10:41:45 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/19 14:34:19 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/19 20:19:12 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void		putchar_len(char c, t_option *options)
 	options->arg_length += 1;
 }
 
-int		count_digit(uintmax_t nb,  unsigned int base)
+int			count_digit(uintmax_t nb, unsigned int base)
 {
 	int		count;
-	
+
 	count = 1;
 	while (nb >= base)
 	{
@@ -56,7 +56,7 @@ int		count_digit(uintmax_t nb,  unsigned int base)
 	return (count);
 }
 
-char	*u_itoa(uintmax_t nb, char *base_char, int base)
+char		*u_itoa(uintmax_t nb, char *base_char, int base)
 {
 	char	*str;
 	int		len;

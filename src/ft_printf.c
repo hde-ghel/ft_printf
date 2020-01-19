@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:22:49 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/19 16:30:18 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/19 19:52:54 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ static	int		print_format(t_printf *env)
 	char	*str_2;
 
 	str_2 = env->format;
-	while(*env->format && *env->format != '%')
+	while (*env->format && *env->format != '%')
 		env->format++;
-	write (1, str_2, env->format - str_2);
-	return(env->format - str_2);
+	write(1, str_2, env->format - str_2);
+	return (env->format - str_2);
 }
 
 static	int		browse_string(t_printf *env)
 {
 	int		arg_length;
 
-	while(*env->format)
+	while (*env->format)
 	{
 		if (*env->format != '%')
 			env->return_value += print_format(env);
@@ -54,7 +54,7 @@ static	int		browse_string(t_printf *env)
 	return (0);
 }
 
-int		ft_printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
 	t_printf	env;
 
@@ -64,5 +64,5 @@ int		ft_printf(const char *format, ...)
 	if (browse_string(&env) == -1)
 		return (-1);
 	va_end(env.va);
-	return(env.return_value);
+	return (env.return_value);
 }

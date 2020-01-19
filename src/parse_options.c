@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:22:59 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/12/14 13:08:13 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/19 19:56:46 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static	void		get_precision(t_printf *env, t_option *options)
 	{
 		options->precision = va_arg(env->va, int);
 		if (options->precision < 0)
-				options->precision = -1;
+			options->precision = -1;
 		env->format++;
 	}
 	else
@@ -85,16 +85,16 @@ static	void		get_length_modifiers(t_printf *env, t_option *options)
 		if (*env->format == 'h')
 			options->mod_h++;
 		else if (*env->format == 'l')
-			options->mod_l++;
+			options->mod_maj_l++;
 		else if (*env->format == 'L')
-			options->mod_L++;
+			options->mod_maj_l++;
 		env->format++;
 	}
 	while (*env->format == 'h' || *env->format == 'l' || *env->format == 'L')
 		env->format++;
 }
 
-void		parse_options(t_printf *env, t_option *options)
+void				parse_options(t_printf *env, t_option *options)
 {
 	if (*env->format == '+' || *env->format == '-' || *env->format == ' ' ||
 		*env->format == '0' || *env->format == '#')

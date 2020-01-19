@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_o_u_x_X.c                                    :+:      :+:    :+:   */
+/*   print_o_u_x.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/13 13:52:12 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/17 14:53:42 by hde-ghel         ###   ########.fr       */
+/*   Created: 2020/01/19 20:16:39 by hde-ghel          #+#    #+#             */
+/*   Updated: 2020/01/19 20:16:44 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,21 @@ static uintmax_t	get_unsinged_type(uintmax_t nb, t_option *options)
 		nb = (unsigned char)nb;
 	else if (options->mod_h == 1)
 		nb = (unsigned short)nb;
-	else if (options->mod_l == 1)
+	else if (options->mod_maj_l == 1)
 		nb = (unsigned long)nb;
-	else if (options->mod_l == 2)
+	else if (options->mod_maj_l == 2)
 		nb = (unsigned long long)nb;
 	else
 		nb = (unsigned int)nb;
 	return (nb);
 }
 
-static	void	print_hex(t_option *options, uintmax_t nb, char *str)
+static	void		print_hex(t_option *options, uintmax_t nb, char *str)
 {
 	int		nb_len;
 	int		full_len;
 
 	nb_len = ft_strlen(str);
-	//fprintf(stdout, "\033[31m precision = %d \n\33[0m", options->precision);
 	full_len = (options->precision > nb_len ? options->precision : nb_len);
 	if (!nb && !options->precision)
 		full_len--;
@@ -50,10 +49,10 @@ static	void	print_hex(t_option *options, uintmax_t nb, char *str)
 	if (nb || options->precision)
 		putstr_len(str, options, 0);
 	if (options->width > full_len && options->flag_left)
-		padding(options, options->width - full_len - (nb ? options->flag_sharp :0), ' ');
+		padding(options, options->width - full_len - (nb ? options->flag_sharp : 0), ' ');
 }
 
-static	void	print_o_u(t_option *options, uintmax_t nb, char *str)
+static	void		print_o_u(t_option *options, uintmax_t nb, char *str)
 {
 	int nb_len;
 	int full_len;
@@ -63,7 +62,7 @@ static	void	print_o_u(t_option *options, uintmax_t nb, char *str)
 	(!nb && !options->precision && !options->flag_sharp) ? full_len-- : 0;
 	if ((options->width > full_len && !options->flag_left && !options->flag_zero) || \
 		(options->precision != -1 && !options->flag_left && options->flag_zero))
-		padding(options, options->width - full_len - 
+		padding(options, options->width - full_len - \
 		(nb && options->precision <= nb_len ? options->flag_sharp : 0), ' ');
 	if (options->flag_sharp && nb && options->conversion == 'o')
 		putchar_len('0', options);
@@ -78,20 +77,20 @@ static	void	print_o_u(t_option *options, uintmax_t nb, char *str)
 		(nb && options->precision <= nb_len ? options->flag_sharp : 0), ' ');
 }
 
-static	char	*format_itoa(t_printf *env, uintmax_t nb)
+static	char		*format_itoa(t_printf *env, uintmax_t nb)
 {
 	if (*env->format == 'x')
-		return(u_itoa(nb, "0123456789abcdef", 16));
+		return (u_itoa(nb, "0123456789abcdef", 16));
 	else if (*env->format == 'X')
-		return(u_itoa(nb, "0123456789ABCDEF", 16));
+		return (u_itoa(nb, "0123456789ABCDEF", 16));
 	else if (*env->format == 'o')
-		return(u_itoa(nb, "01234567", 8));
+		return (u_itoa(nb, "01234567", 8));
 	else if (*env->format == 'u')
-		return(u_itoa(nb, "0123456789", 10));
+		return (u_itoa(nb, "0123456789", 10));
 	return (NULL);
 }
 
-int		print_ouxX(t_printf *env, t_option *options)
+int					print_oux(t_printf *env, t_option *options)
 {
 	uintmax_t	nb;
 	char		*str;

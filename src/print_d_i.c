@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 13:27:37 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/19 14:34:14 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/19 20:06:47 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ static intmax_t	get_s_type(intmax_t n, t_option *options)
 		n = (char)n;
 	else if (options->mod_h == 1)
 		n = (short int)n;
-	else if (options->mod_l == 1)
+	else if (options->mod_maj_l == 1)
 		n = (long int)n;
-	else if (options->mod_l == 2)
+	else if (options->mod_maj_l == 2)
 		n = (long long int)n;
 	else
 		n = (int)n;
 	return (n);
 }
 
-char		*l_itoa(intmax_t n)
+char			*l_itoa(intmax_t n)
 {
 	int			len;
 	intmax_t	nb;
@@ -45,10 +45,10 @@ char		*l_itoa(intmax_t n)
 		str[--len] = (nb % 10) + '0';
 		nb /= 10;
 	}
-	return(str);
+	return (str);
 }
 
-void	display_d_i(t_option *options, intmax_t nb, char *str)
+static	void	display_d_i(t_option *options, intmax_t nb, char *str)
 {
 	int		full_len;
 	int		nb_len;
@@ -62,26 +62,22 @@ void	display_d_i(t_option *options, intmax_t nb, char *str)
 		putchar_len(' ', options);
 		options->width--;
 	}
-	if (nb == 0 && options->precision == 0)
-		full_len--;
+	(nb == 0 && options->precision == 0) ? full_len-- : 0;
 	if ((options->width > full_len && !options->flag_left && !options->flag_zero)
 		|| (options->precision != -1 && !options->flag_left && options->flag_zero))
 		padding(options, options->width - full_len - sign, ' ');
-	if (nb < 0)
-		putchar_len('-', options);
-	if (nb >= 0 && options->flag_plus)
-		putchar_len('+', options);
+	(nb < 0) ? putchar_len('-', options) : 0;
+	(nb >= 0 && options->flag_plus) ? putchar_len('+', options) : 0;
 	if (options->precision > nb_len)
 		padding(options, options->precision - nb_len, '0');
 	if (options->width && options->precision < 0 && !options->flag_left && options->flag_zero)
 		padding(options, options->width - nb_len - sign, '0');
-	if (nb || options->precision)
-		putstr_len(str, options, 0);
+	(nb || options->precision) ? putstr_len(str, options, 0) : 0;
 	if (options->width > full_len && options->flag_left)
 		padding(options, options->width - full_len - sign, ' ');
 }
 
-int		print_d_i(t_printf *env, t_option *options)
+int				print_d_i(t_printf *env, t_option *options)
 {
 	intmax_t	nb;
 	char		*str;

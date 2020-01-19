@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:23:32 by hde-ghel          #+#    #+#             */
-/*   Updated: 2019/11/06 16:34:34 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/19 20:17:30 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,3 @@ int		print_percent(t_printf *env, t_option *options)
 	env->format++;
 	return (0);
 }
-
