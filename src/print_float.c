@@ -12,32 +12,32 @@
 
 #include "../include/ft_printf.h"
 
-static	int		print_nan_inf(t_printf *env, t_option *options, long double nb)
+static	int		print_nan_inf(t_printf *env, t_option *opt, long double nb)
 {
 	int		len;
 	char	*str;
 
 	str = ft_isnan(nb) ? "nan" : "inf";
 	len = 3;
-	if (options->width > len && !options->flag_left)
-		padding(options, options->width - len, options->flag_zero ? '0' : ' ');
-	putstr_len(str, options, len);
-	if (options->width > len && options->flag_left)
-		padding(options, options->width - len, ' ');
+	if (opt->width > len && !opt->flag_left)
+		padding(opt, opt->width - len, opt->flag_zero ? '0' : ' ');
+	putstr_len(str, opt, len);
+	if (opt->width > len && opt->flag_left)
+		padding(opt, opt->width - len, ' ');
 	env->format++;
 	return (0);
 }
 
-static	long	precision_multiplier(t_option *options)
+static	long	precision_multiplier(t_option *opt)
 {
 	int		i;
 	long	ret;
 
 	i = 0;
 	ret = 1;
-	if (options->precision == -1)
-		options->precision = 6;
-	while (i != options->precision)
+	if (opt->precision == -1)
+		opt->precision = 6;
+	while (i != opt->precision)
 	{
 		ret *= 10;
 		i++;
@@ -45,24 +45,24 @@ static	long	precision_multiplier(t_option *options)
 	return (ret);
 }
 
-static	char	*ftoa(t_option *options, long double nb)
+static	char	*ftoa(t_option *opt, long double nb)
 {
 	char			*d_str;
 	char			*f_str;
 	long double		float_part;
 
 	float_part = nb - (unsigned long long)nb + 1;
-	float_part *= precision_multiplier(options);
+	float_part *= precision_multiplier(opt);
 	if ((float_part - (unsigned long long)float_part) >= 0.5)
 		float_part++;
-	((float_part / precision_multiplier(options)) > 2) ? nb += 1 : 0;
+	((float_part / precision_multiplier(opt)) > 2) ? nb += 1 : 0;
 	if (!(d_str = ull_itoa((unsigned long long)nb)))
 		return (NULL);
-	if (options->precision == 0 && options->flag_sharp)
+	if (opt->precision == 0 && opt->flag_sharp)
 		return (ft_strjoin_free(d_str, ".", 1));
-	if (options->precision == 0)
+	if (opt->precision == 0)
 	{
-		options->width--;
+		opt->width--;
 		return (d_str);
 	}
 	if (!(f_str = ull_itoa((unsigned long long)float_part)))
@@ -74,43 +74,43 @@ static	char	*ftoa(t_option *options, long double nb)
 	return (d_str);
 }
 
-static	void	displa_float(t_option *options)
+static	void	displa_float(t_option *opt)
 {
 	int		sign;
 	int		len;
 
-	sign = (options->f_sign || options->flag_plus) ? 1 : 0;
-	len = ft_strlen(options->f_str);
-	(!options->precision && !options->flag_sharp) ? len-- : 0;
-	if (options->precision <= len && options->flag_space && !sign)
+	sign = (opt->f_sign || opt->flag_plus) ? 1 : 0;
+	len = ft_strlen(opt->f_str);
+	(!opt->precision && !opt->flag_sharp) ? len-- : 0;
+	if (opt->precision <= len && opt->flag_space && !sign)
 	{
-		putchar_len(' ', options);
-		options->width--;
+		putchar_len(' ', opt);
+		opt->width--;
 	}
-	if (options->width > len && !options->flag_left && !options->flag_zero)
-		padding(options, options->width - len - sign, ' ');
-	options->f_sign ? putchar_len('-', options) : 0;
-	(options->flag_plus && !options->f_sign) ? putchar_len('+', options) : 0;
-	if (options->width > len && !options->flag_left && options->flag_zero)
-		padding(options, options->width - len - sign, '0');
-	putstr_len(options->f_str, options, 0);
-	if (options->width > len && options->flag_left)
-		padding(options, options->width - len - sign, ' ');
+	if (opt->width > len && !opt->flag_left && !opt->flag_zero)
+		padding(opt, opt->width - len - sign, ' ');
+	opt->f_sign ? putchar_len('-', opt) : 0;
+	(opt->flag_plus && !opt->f_sign) ? putchar_len('+', opt) : 0;
+	if (opt->width > len && !opt->flag_left && opt->flag_zero)
+		padding(opt, opt->width - len - sign, '0');
+	putstr_len(opt->f_str, opt, 0);
+	if (opt->width > len && opt->flag_left)
+		padding(opt, opt->width - len - sign, ' ');
 }
 
-int				manage_float(t_printf *env, t_option *options)
+int				manage_float(t_printf *env, t_option *opt)
 {
 	long double	nb;
 
-	nb = (options->mod_maj_l == 0) ? va_arg(env->va, double) : \
+	nb = (opt->mod_maj_l == 0) ? va_arg(env->va, double) : \
 		va_arg(env->va, long double);
 	if (ft_isnan(nb) || ft_isinf(nb))
-		return (print_nan_inf(env, options, nb));
-	options->f_sign = (nb < 0) ? 1 : 0;
+		return (print_nan_inf(env, opt, nb));
+	opt->f_sign = (nb < 0) ? 1 : 0;
 	nb = (nb < 0) ? -nb : nb;
-	if (!(options->f_str = ftoa(options, nb)))
+	if (!(opt->f_str = ftoa(opt, nb)))
 		return (-1);
-	displa_float(options);
+	displa_float(opt);
 	env->format++;
 	return (0);
 }

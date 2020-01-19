@@ -14,15 +14,15 @@
 
 static	int		dispatch_args(t_printf *env)
 {
-	t_option	options;
+	t_option	opt;
 
-	ft_bzero(&options, sizeof(options));
-	options.precision = -1;
+	ft_bzero(&opt, sizeof(opt));
+	opt.precision = -1;
 	env->format++;
-	parse_options(env, &options);
-	if (print_conversions(env, &options) == -1)
+	parse_opt(env, &opt);
+	if (print_conversions(env, &opt) == -1)
 		return (-1);
-	return (options.arg_length);
+	return (opt.arg_length);
 }
 
 static	int		print_format(t_printf *env)

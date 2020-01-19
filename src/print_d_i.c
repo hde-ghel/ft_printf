@@ -12,15 +12,15 @@
 
 #include "../include/ft_printf.h"
 
-static intmax_t	get_s_type(intmax_t n, t_option *options)
+static intmax_t	get_s_type(intmax_t n, t_option *opt)
 {
-	if (options->mod_h == 2)
+	if (opt->mod_h == 2)
 		n = (char)n;
-	else if (options->mod_h == 1)
+	else if (opt->mod_h == 1)
 		n = (short int)n;
-	else if (options->mod_maj_l == 1)
+	else if (opt->mod_maj_l == 1)
 		n = (long int)n;
-	else if (options->mod_maj_l == 2)
+	else if (opt->mod_maj_l == 2)
 		n = (long long int)n;
 	else
 		n = (int)n;
@@ -48,45 +48,45 @@ char			*l_itoa(intmax_t n)
 	return (str);
 }
 
-static	void	display_d_i(t_option *options, intmax_t nb, char *str)
+static	void	display_d_i(t_option *opt, intmax_t nb, char *str)
 {
 	int		full_len;
 	int		nb_len;
 	int		sign;
 
-	sign = (nb < 0 || options->flag_plus) ? 1 : 0;
+	sign = (nb < 0 || opt->flag_plus) ? 1 : 0;
 	nb_len = count_digit(nb < 0 ? -nb : nb, 10);
-	full_len = (options->precision > nb_len ? options->precision : nb_len);
-	if (options->flag_space && options->precision <= full_len && !sign)
+	full_len = (opt->precision > nb_len ? opt->precision : nb_len);
+	if (opt->flag_space && opt->precision <= full_len && !sign)
 	{
-		putchar_len(' ', options);
-		options->width--;
+		putchar_len(' ', opt);
+		opt->width--;
 	}
-	(nb == 0 && options->precision == 0) ? full_len-- : 0;
-	if ((options->width > full_len && !options->flag_left && !options->flag_zero)
-		|| (options->precision != -1 && !options->flag_left && options->flag_zero))
-		padding(options, options->width - full_len - sign, ' ');
-	(nb < 0) ? putchar_len('-', options) : 0;
-	(nb >= 0 && options->flag_plus) ? putchar_len('+', options) : 0;
-	if (options->precision > nb_len)
-		padding(options, options->precision - nb_len, '0');
-	if (options->width && options->precision < 0 && !options->flag_left && options->flag_zero)
-		padding(options, options->width - nb_len - sign, '0');
-	(nb || options->precision) ? putstr_len(str, options, 0) : 0;
-	if (options->width > full_len && options->flag_left)
-		padding(options, options->width - full_len - sign, ' ');
+	(nb == 0 && opt->precision == 0) ? full_len-- : 0;
+	if ((opt->width > full_len && !opt->flag_left && !opt->flag_zero)
+		|| (opt->precision != -1 && !opt->flag_left && opt->flag_zero))
+		padding(opt, opt->width - full_len - sign, ' ');
+	(nb < 0) ? putchar_len('-', opt) : 0;
+	(nb >= 0 && opt->flag_plus) ? putchar_len('+', opt) : 0;
+	if (opt->precision > nb_len)
+		padding(opt, opt->precision - nb_len, '0');
+	if (opt->width && opt->precision < 0 && !opt->flag_left && opt->flag_zero)
+		padding(opt, opt->width - nb_len - sign, '0');
+	(nb || opt->precision) ? putstr_len(str, opt, 0) : 0;
+	if (opt->width > full_len && opt->flag_left)
+		padding(opt, opt->width - full_len - sign, ' ');
 }
 
-int				print_d_i(t_printf *env, t_option *options)
+int				print_d_i(t_printf *env, t_option *opt)
 {
 	intmax_t	nb;
 	char		*str;
 
 	nb = va_arg(env->va, intmax_t);
-	nb = get_s_type(nb, options);
+	nb = get_s_type(nb, opt);
 	if (!(str = l_itoa(nb)))
 		return (-1);
-	display_d_i(options, nb, str);
+	display_d_i(opt, nb, str);
 	ft_strdel(&str);
 	env->format++;
 	return (0);

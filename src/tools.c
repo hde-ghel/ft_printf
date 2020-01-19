@@ -12,16 +12,16 @@
 
 #include "../include/ft_printf.h"
 
-void		putstr_len(char *str, t_option *options, int len)
+void		putstr_len(char *str, t_option *opt, int len)
 {
 	if (!str)
 		return ;
 	len = (!len ? ft_strlen(str) : len);
 	write(1, str, len);
-	options->arg_length += len;
+	opt->arg_length += len;
 }
 
-int			padding(t_option *options, int len, char c)
+int			padding(t_option *opt, int len, char c)
 {
 	int		i;
 
@@ -33,14 +33,14 @@ int			padding(t_option *options, int len, char c)
 		write(1, &c, 1);
 		i++;
 	}
-	options->arg_length += len;
+	opt->arg_length += len;
 	return (0);
 }
 
-void		putchar_len(char c, t_option *options)
+void		putchar_len(char c, t_option *opt)
 {
 	write(1, &c, 1);
-	options->arg_length += 1;
+	opt->arg_length += 1;
 }
 
 int			count_digit(uintmax_t nb, unsigned int base)

@@ -12,24 +12,24 @@
 
 #include "../include/ft_printf.h"
 
-int				print_conversions(t_printf *env, t_option *options)
+int				print_conversions(t_printf *env, t_option *opt)
 {
-	options->conversion = *env->format;
-	if (options->conversion == 'c')
-		print_char(env, options);
-	else if (options->conversion == 's')
-		print_string(env, options);
-	else if (options->conversion == 'p')
-		return (print_p(env, options));
-	else if (options->conversion == '%')
-		print_percent(env, options);
-	else if (options->conversion == 'd' || options->conversion == 'i')
-		return (print_d_i(env, options));
-	else if (options->conversion == 'o' || options->conversion == 'u'
-			|| options->conversion == 'x' || options->conversion == 'X')
-		return (print_oux(env, options));
-	else if (options->conversion == 'f')
-		return (manage_float(env, options));
+	opt->conversion = *env->format;
+	if (opt->conversion == 'c')
+		print_char(env, opt);
+	else if (opt->conversion == 's')
+		print_string(env, opt);
+	else if (opt->conversion == 'p')
+		return (print_p(env, opt));
+	else if (opt->conversion == '%')
+		print_percent(env, opt);
+	else if (opt->conversion == 'd' || opt->conversion == 'i')
+		return (print_d_i(env, opt));
+	else if (opt->conversion == 'o' || opt->conversion == 'u'
+			|| opt->conversion == 'x' || opt->conversion == 'X')
+		return (print_oux(env, opt));
+	else if (opt->conversion == 'f')
+		return (manage_float(env, opt));
 	return (0);
 }
 

@@ -6,24 +6,24 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 10:41:47 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/19 20:04:16 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/19 20:54:37 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-void		print_char(t_printf *env, t_option *options)
+void		print_char(t_printf *env, t_option *opt)
 {
-	if (options->flag_left != 1)
-		padding(options, options->width - 1, (options->flag_zero ? '0' : ' '));
+	if (opt->flag_left != 1)
+		padding(opt, opt->width - 1, (opt->flag_zero ? '0' : ' '));
 	ft_putchar(va_arg(env->va, int));
-	options->arg_length += 1;
-	if (options->flag_left == 1)
-		padding(options, options->width - 1, (options->flag_zero ? '0' : ' '));
+	opt->arg_length += 1;
+	if (opt->flag_left == 1)
+		padding(opt, opt->width - 1, (opt->flag_zero ? '0' : ' '));
 	env->format++;
 }
 
-void		print_string(t_printf *env, t_option *options)
+void		print_string(t_printf *env, t_option *opt)
 {
 	char	*str;
 	int		len;
@@ -32,23 +32,23 @@ void		print_string(t_printf *env, t_option *options)
 	if ((str = va_arg(env->va, char *)) != NULL)
 	{
 		arg_len = ft_strlen(str);
-		len = (options->precision >= 0) ? options->precision : arg_len;
+		len = (opt->precision >= 0) ? opt->precision : arg_len;
 		if (len > arg_len)
 			len = arg_len;
-		if (options->width > len && !options->flag_left)
-			padding(options, options->width - len, options->flag_zero ? '0' \
+		if (opt->width > len && !opt->flag_left)
+			padding(opt, opt->width - len, opt->flag_zero ? '0' \
 					: ' ');
 		if (len)
-			putstr_len(str, options, len);
-		if (options->width > len && options->flag_left)
-			padding(options, options->width - len, ' ');
+			putstr_len(str, opt, len);
+		if (opt->width > len && opt->flag_left)
+			padding(opt, opt->width - len, ' ');
 	}
 	else
-		putstr_len("(null)", options, 6);
+		putstr_len("(null)", opt, 6);
 	env->format++;
 }
 
-int			print_p(t_printf *env, t_option *options)
+int			print_p(t_printf *env, t_option *opt)
 {
 	char		*str;
 	int			len;
@@ -59,19 +59,19 @@ int			print_p(t_printf *env, t_option *options)
 	if (!(str = u_itoa(nb, "0123456789abcdef", 16)))
 		return (-1);
 	len = ft_strlen(str) + 2;
-	precision = options->precision > len - 2 ? options->precision - len + 2 : 0;
-	if ((options->width > len && !options->flag_left && !options->flag_zero) ||
-		(options->precision != -1 && !options->flag_left && options->flag_zero))
-		padding(options, options->width - len - precision + \
-				(*str == '0' && !options->precision ? 1 : 0), ' ');
-	putstr_len("0x", options, 2);
-	if (options->width && options->precision < 0 && !options->flag_left && \
-			options->flag_zero)
-		padding(options, options->width - len + precision, '0');
-	(options->precision != -1) ? padding(options, precision, '0') : 0;
-	(nb || options->precision) ? putstr_len(str, options, len - 2) : 0;
-	if (options->width > len && options->flag_left)
-		padding(options, options->width - len - precision + (!nb && !options->precision ? 1 : 0), ' ');
+	precision = opt->precision > len - 2 ? opt->precision - len + 2 : 0;
+	if ((opt->width > len && !opt->flag_left && !opt->flag_zero) ||
+		(opt->precision != -1 && !opt->flag_left && opt->flag_zero))
+		padding(opt, opt->width - len - precision + \
+				(*str == '0' && !opt->precision ? 1 : 0), ' ');
+	putstr_len("0x", opt, 2);
+	if (opt->width && opt->precision < 0 && !opt->flag_left && opt->flag_zero)
+		padding(opt, opt->width - len + precision, '0');
+	(opt->precision != -1) ? padding(opt, precision, '0') : 0;
+	(nb || opt->precision) ? putstr_len(str, opt, len - 2) : 0;
+	if (opt->width > len && opt->flag_left)
+		padding(opt, opt->width - len - precision + (!nb && !opt->precision ? \
+					1 : 0), ' ');
 	ft_strdel(&str);
 	env->format++;
 	return (0);

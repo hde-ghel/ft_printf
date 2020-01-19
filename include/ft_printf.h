@@ -48,49 +48,49 @@ int				ft_printf(const char *format, ...);
 ** printf_float.c
 */
 char			*ull_itoa(unsigned long long n);
-int				manage_float(t_printf *env, t_option *options);
+int				manage_float(t_printf *env, t_option *opt);
 
 /*
 ** parse_option.c
 */
 
-void			parse_options(t_printf *env, t_option *options);
+void			parse_opt(t_printf *env, t_option *opt);
 
 /*
 ** print_conversions
 */
 
-int				print_conversions(t_printf *env, t_option *options);
+int				print_conversions(t_printf *env, t_option *opt);
 
 /*
 ** print_d_i.c
 */
-int				print_d_i(t_printf *env, t_option *options);
+int				print_d_i(t_printf *env, t_option *opt);
 char			*l_itoa(intmax_t n);
 
 /*
 ** print_c_s_p.c
 */
-void			print_char(t_printf *env, t_option *options);
-void			print_string(t_printf *env, t_option *options);
-int				print_p(t_printf *env, t_option *options);
+void			print_char(t_printf *env, t_option *opt);
+void			print_string(t_printf *env, t_option *opt);
+int				print_p(t_printf *env, t_option *opt);
 
 /*
 ** print_o_u_x_X.c
 */
-int				print_oux(t_printf *env, t_option *options);
+int				print_oux(t_printf *env, t_option *opt);
 
 /*
 ** tools.c
 */
 char			*u_itoa(uintmax_t nb, char *base_char, int base);
 int				padding(t_option *option, int len, char c);
-void			putchar_len(char c, t_option *options);
-void			putstr_len(char *str, t_option *options, int len);
+void			putchar_len(char c, t_option *opt);
+void			putstr_len(char *str, t_option *opt, int len);
 int				count_digit(uintmax_t nb, unsigned int base);
 
 /*
 **print_percent.c
 */
-int				print_percent(t_printf *env, t_option *options);
+int				print_percent(t_printf *env, t_option *opt);
 #endif

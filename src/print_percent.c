@@ -12,13 +12,13 @@
 
 #include "../include/ft_printf.h"
 
-int		print_percent(t_printf *env, t_option *options)
+int		print_percent(t_printf *env, t_option *opt)
 {
-	if (!options->flag_left)
-		padding(options, options->width - 1, options->flag_zero ? '0' : ' ');
-	putchar_len(*env->format, options);
-	if (options->flag_left)
-		padding(options, options->width - 1, ' ');
+	if (!opt->flag_left)
+		padding(opt, opt->width - 1, opt->flag_zero ? '0' : ' ');
+	putchar_len(*env->format, opt);
+	if (opt->flag_left)
+		padding(opt, opt->width - 1, ' ');
 	env->format++;
 	return (0);
 }
