@@ -6,9 +6,23 @@
 int		main()
 {
 	int		return_pf;
+	int		i = 65245;
+	long	j = -15654654;
+	char	*str = "coucou";
 
-	ft_printf("%", 120);
-	printf("%", 120);
+
+	
+
+	printf("%*.*lhl*d\n",10, 8, 100, i);
+	ft_printf("%*.*lhl*d\n",10, 8, 100, i);
+
+
+
+	//printf("%s %llhi %i %li %i %d %sn",str, i, j, j);
+	//ft_printf("%s %llh20i %i %li %i \n",str, i, j, j);
+	//printf("%s %10.2ll10hi %i %li \n",str, i, j, j);
+	//printf("%s %10.2ll10hi %i %li \n",str, i, j, j);
+	//printf("%lmmmmmmmmmmmm20i", i);
 
 /*
 	ft_printf("\n{red}▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▃▅▇█▓▒░FLOAT░▒▓█▇▅▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂{eoc}\n\n");

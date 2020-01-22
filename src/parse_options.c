@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 19:22:59 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/19 20:55:51 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:03:15 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,6 @@ void				parse_opt(t_printf *env, t_option *opt)
 		get_precision(env, opt);
 	if (*env->format == 'h' || *env->format == 'l' || *env->format == 'L')
 		get_length_modifiers(env, opt);
+	if (ft_isdigit(*env->format) || *env->format == '*')
+		get_width(env, opt);
 }

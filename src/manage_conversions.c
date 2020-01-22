@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 19:53:51 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/19 19:55:58 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:02:38 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int				print_conversions(t_printf *env, t_option *opt)
 		return (print_oux(env, opt));
 	else if (opt->conversion == 'f')
 		return (manage_float(env, opt));
+	else if (opt->width)
+		padding(opt, opt->width - 1, opt->flag_zero ? '0' : ' ');
 	return (0);
 }
 
