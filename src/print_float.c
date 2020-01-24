@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:58:44 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/19 20:11:08 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/24 16:36:36 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,26 @@ static	char	*ftoa(t_option *opt, long double nb)
 	if (!(d_str = ull_itoa((unsigned long long)nb)))
 		return (NULL);
 	if (opt->precision == 0 && opt->flag_sharp)
-		return (ft_strjoin_free(d_str, ".", 1));
+	{
+		if (!(f_str = ft_strjoin_free(d_str, ".", 1)))
+		{
+			ft_strdel(&d_str);
+			return (NULL);
+		}
+		else
+			return(f_str);
+	}
 	if (opt->precision == 0)
 	{
 		opt->width--;
 		return (d_str);
 	}
 	if (!(f_str = ull_itoa((unsigned long long)float_part)))
-		return (NULL);
+		return (free_str(d_str, NULL));
 	if (!(d_str = ft_strjoin_free(d_str, ".", 1)))
-		return (NULL);
-	d_str = ft_strjoin_free(d_str, f_str + 1, 1);
+		return (free_str(d_str, f_str));
+	if (!(d_str = ft_strjoin_free(d_str, f_str + 1, 1)))
+		return (free_str(d_str, f_str));
 	ft_strdel(&f_str);
 	return (d_str);
 }
@@ -111,6 +120,7 @@ int				manage_float(t_printf *env, t_option *opt)
 	if (!(opt->f_str = ftoa(opt, nb)))
 		return (-1);
 	displa_float(opt);
+	ft_strdel(&opt->f_str);
 	env->format++;
 	return (0);
 }

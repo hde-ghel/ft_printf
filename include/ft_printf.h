@@ -6,7 +6,7 @@
 /*   By: hde-ghel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/09 14:01:33 by hde-ghel          #+#    #+#             */
-/*   Updated: 2020/01/22 18:08:14 by hde-ghel         ###   ########.fr       */
+/*   Updated: 2020/01/24 16:30:37 by hde-ghel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int				ft_printf(const char *format, ...);
 */
 char			*ull_itoa(unsigned long long n);
 int				manage_float(t_printf *env, t_option *opt);
+char			*free_str(char *str1, char *str2);
 
 /*
 ** parse_option.c
