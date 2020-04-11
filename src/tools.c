@@ -16,7 +16,7 @@ void		putstr_len(char *str, t_option *opt, int len)
 {
 	if (!str)
 		return ;
-	len = (!len ? ft_strlen(str) : len);
+	len = (!len ? ft_strlen(str) : (size_t)len);
 	write(1, str, len);
 	opt->arg_length += len;
 }

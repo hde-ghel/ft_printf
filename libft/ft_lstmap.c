@@ -16,7 +16,8 @@ void	del(void *content, size_t content_size)
 {
 	free(content);
 	content = NULL;
-	content_size = 0;
+	if (content_size != 0)
+		content_size = 0;
 }
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))

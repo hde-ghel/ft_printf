@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = libft.a
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
 LIBFT = $(LIBDIR)libft.a
@@ -51,7 +51,7 @@ $(OBJSUBDIR):
 
 $(NAME): $(OBJSUBDIR) $(OBJ)
 	@echo "$(C_CYAN)libftprintf OBJ creation   [$(C_GREEN)✔$(C_CYAN)] $(C_RESET)"
-	@ar ru $(NAME) $(OBJ) $(OBJLIB)
+	@ar rc $(NAME) $(OBJ) $(OBJLIB)
 	@echo "$(C_CYAN)libftprintf OBJ compilation[$(C_GREEN)✔$(C_CYAN)]$(C_RESET)"
 	@ranlib $(NAME)
 	@echo "$(C_CYAN)libftprintf.a creation     [$(C_GREEN)✔$(C_CYAN)]$(C_RESET)"
